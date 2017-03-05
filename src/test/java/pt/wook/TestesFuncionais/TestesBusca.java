@@ -1,6 +1,9 @@
 package pt.wook.TestesFuncionais;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
+import javax.swing.plaf.metal.MetalPopupMenuSeparatorUI;
+
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,16 +14,15 @@ public class TestesBusca {
 
 	@Test
 	
-	public void PesquisarLivroExistente(){
+	public void PesquisarLivroExistente() throws InterruptedException{
 		
 		System.setProperty("webdriver.chrome.driver", "C:\\EstudoFlavia\\chromedriver.exe");
 		
 		String nomeLivro = "SOS Ansiedade";
-		boolean exibiuLivro = true;
 		String urlDoSite = "https://www.wook.pt/";
 		
 		WebDriver navegador = new ChromeDriver(); // abre o navegador sem nada
-		navegador.manage().window().maximize();
+		navegador.manage().window().maximize(); // maximiza a janela
 		navegador.get(urlDoSite);// abre o site
 		
 		
@@ -28,13 +30,18 @@ public class TestesBusca {
 		boxBuscar.click();
 		
 		WebElement caixaDeBusca = navegador.findElement(By.id("form-searchform-palavra"));
-		caixaDeBusca.sendKeys(nomeLivro);
+		caixaDeBusca.sendKeys(nomeLivro);// preenche uma caisa de tx
 		
-		WebElement botaoBuscar = navegador.findElement(By.xpath("//*[@id=\"header-navbar\"]/div[2]/div[1]/button[1]"));
+		Thread.sleep(1000);
+		
+		WebElement botaoBuscar = navegador.findElement(By.xpath("//*[@id=\"header-navbar\"]/div[2]/div[1]/button[1]")); // qdo não tem id ou name
 		botaoBuscar.click();
 		
-		
-		assertTrue(exibiuLivro);
+		WebElement mensagemResultadoBusca = navegador.findElement(By.xpath("//*[@id=\"search-page\"]/div[1]/h1"));
+		String mensagemExibida = mensagemResultadoBusca.getText();
+		String mensagemEsperada = "2 RESULTADOS PARA \"SOS ANSIEDADE\"";
+		assertEquals(mensagemEsperada, mensagemExibida);
+				
 		
 		
 	}
