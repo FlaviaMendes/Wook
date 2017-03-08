@@ -2,6 +2,11 @@ package pt.wook.TestesFuncionais;
 
 import static org.junit.Assert.*;
 
+import org.hamcrest.Matchers;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+
 import static org.hamcrest.Matchers.*;
 
 import org.junit.Test;
@@ -11,21 +16,30 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class TestesBusca {
-/*
-	@Test
-	
-	
-	public void PesquisarLivroExistente() throws InterruptedException{
-		
+
+	private static String urlDoSite;
+	private static WebDriver navegador;
+
+	@BeforeClass
+	public static void antesDeTodosOsTestes() {
 		System.setProperty("webdriver.chrome.driver", "C:\\EstudoFlavia\\chromedriver.exe");
-		
-		String nomeLivro = "SOS Ansiedade";
-		String urlDoSite = "https://www.wook.pt/";
+		urlDoSite = "https://www.wook.pt/";
 		
 		WebDriver navegador = new ChromeDriver(); // abre o navegador sem nada
 		navegador.manage().window().maximize(); // maximiza a janela
+	
+	}
+	
+	@Before
+	public void antesDeCadaTeste() {
+		
 		navegador.get(urlDoSite);// abre o site
 		
+	}
+	
+	@Test
+	public void PesquisarLivroExistente() throws InterruptedException{
+		String nomeLivro = "SOS Ansiedade";
 		
 		WebElement boxBuscar = navegador.findElement(By.xpath("//*[@id=\"header-navbar\"]/div[2]/div[1]"));
 		boxBuscar.click();
@@ -53,23 +67,15 @@ public class TestesBusca {
 		WebElement livroExibido = navegador.findElement(By.xpath("//*[@id=\"search-page\"]/div[3]/div[1]/div[2]/div[1]/a"));
 		assertTrue(livroExibido.isDisplayed());
 		
-		navegador.close();
 
 	}
 	
-	@Test
 	
+	@Test
 	public void PesquisarLivroPorAutor() throws InterruptedException{
 		
-		System.setProperty("webdriver.chrome.driver", "C:\\EstudoFlavia\\chromedriver.exe");
-		
 		String nomeAutor = "NICHOLAS SPARKS";
-		String urlDoSite = "https://www.wook.pt/";
-		
-		WebDriver navegador = new ChromeDriver();
-		navegador.manage().window().maximize();
-		navegador.get(urlDoSite);
-		
+				
 		WebElement boxBuscar = navegador.findElement(By.xpath("//*[@id=\"header-navbar\"]/div[2]/div[1]"));
 		boxBuscar.click();
 		
@@ -92,23 +98,15 @@ public class TestesBusca {
 		WebElement nomeDoAutorExibido = navegador.findElement(By.xpath("//*[@id=\"search-page\"]/div[3]/div[1]/div[2]/div[3]/a"));
 		assertTrue(nomeDoAutorExibido.isDisplayed());
 		
-		navegador.close();
 		
-	}*/
+	}
 	
 	@Test
 	
 	public void PesquisarLivroPorEditor() throws InterruptedException{
 		
-		System.setProperty("webdriver.chrome.driver",  "C:\\EstudoFlavia\\chromedriver.exe");
-		
 		String nomeEditor = "Editorial Presença";
-		String urlDoSite = "https://www.wook.pt/";
-		
-		WebDriver navegador = new ChromeDriver();
-		navegador.manage().window().maximize();
-		navegador.get(urlDoSite);
-		
+				
 		WebElement boxBusca = navegador.findElement(By.xpath("//*[@id=\"header-navbar\"]/div[2]/div[1]"));
 		boxBusca.click();
 		
@@ -123,15 +121,57 @@ public class TestesBusca {
 		WebElement mensagemResultadoBusca = navegador.findElement(By.xpath("//*[@id=\"search-page\"]/div[1]/h1"));
 		String mensagemExibida = mensagemResultadoBusca.getText();
 		String mensagemEsperado = "4125 RESULTADOS PARA \"EDITORIAL PRESENÇA\"";
-		assertEquals(mensagemEsperado, mensagemExibida);
+		assertThat(mensagemEsperado, Matchers.matchesPattern("[0-9]* RESULTADOS PARA \"EDITORIAL PRESENÇA\""));
 		
 		int numeroExibido = Integer.parseInt(mensagemExibida.split(" ")[0]);
 		assertThat(numeroExibido, greaterThanOrEqualTo(1));
 		
 		// nao tem como confirmar na página o editor.
 		
+	}
+	
+	@Test
+	
+	public void PesquisarLivroInexistente() throws InterruptedException{
+		
+		String nomeLivroInexistente = "ASDFGHJKLÇ";
+				
+		WebElement boxBusca = navegador.findElement(By.xpath("//*[@id=\"header-navbar\"]/div[2]/div[1]"));
+		boxBusca.click();
+		
+		WebElement caixaBusca = navegador.findElement(By.id("form-searchform-palavra"));
+		caixaBusca.sendKeys(nomeLivroInexistente);
+		
+		Thread.sleep(1000);
+		
+		WebElement botaoBusca = navegador.findElement(By.xpath("//*[@id=\"header-navbar\"]/div[2]/div[1]/button[1]"));
+		botaoBusca.click();
+		
+		WebElement mensagemResultadoBusca = navegador.findElement(By.xpath("//*[@id=\"search-page\"]/div[1]/h1"));
+		String mensagemExibida = mensagemResultadoBusca.getText();
+		String mensagemEsperada = "SEM RESULTADOS PARA \"ASDFGHJKLÇ\"";
+		assertEquals(mensagemEsperada, mensagemExibida);
+		
+		WebElement mensagemBuscaSugerida = navegador.findElement(By.xpath("//*[@id=\"search-page\"]/div[2]/h1"));
+		String mensagemSugeridaExibida = mensagemBuscaSugerida.getText();
+		String mensagemSugeridaEsperada = "1 RESULTADOS PARA \"ISTEVE\"";
+		assertEquals(mensagemSugeridaEsperada, mensagemSugeridaExibida);
+		
+		int numeroExibido = Integer.parseInt(mensagemSugeridaExibida.split(" ")[0]);
+		assertThat(numeroExibido, greaterThanOrEqualTo(1));
+		
+		WebElement nomeSugerido = navegador.findElement(By.xpath("//*[@id=\"search-page\"]/div[5]/div/div[2]/div[1]/a"));
+		assertTrue (nomeSugerido.isDisplayed());
+		
+	} 
+	
+	@AfterClass
+	public static void depoisDeTodosOsTestes(){
+		
 		navegador.close();
 		
 	}
+	
+	
 	
 }
