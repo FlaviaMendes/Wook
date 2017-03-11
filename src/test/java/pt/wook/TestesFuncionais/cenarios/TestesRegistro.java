@@ -1,6 +1,5 @@
 package pt.wook.TestesFuncionais.cenarios;
 
-
 import static org.junit.Assert.*;
 
 import org.junit.Before;
@@ -17,69 +16,59 @@ import pt.wook.TestesFuncionais.paginas.PaginaPrincipal;
 import pt.wook.TestesFuncionais.paginas.PaginaRegistro;
 
 public class TestesRegistro {
-	
-	private static String urlDoSite;
-	private static WebDriver navegador;
 
-		@BeforeClass
-		public static void antesDeTodosOsTestes() {
-			
-			System.setProperty("webdriver.chrome.driver", "C:\\EstudoFlavia\\chromedriver.exe");
-			urlDoSite = "https://www.wook.pt/";
-			navegador = new ChromeDriver();
-			navegador.manage().window().maximize();
-			
-		}
+	private PaginaRegistro registro;
+
+	@Before
+	public void antesDeCadaTeste() {
 		
-		@Before
-		public void antesDeCadaTeste(){
-			
-			navegador.get(urlDoSite);
-			
-		}
-		
-		@Test
-		public void registroComSucessoOptandoPorReceberComunicacoesDeMarketing(){
-			
-			PaginaPrincipal principal = new PaginaPrincipal();
-			principal.abrirMenu();
-			
-			PaginaLogin login = principal.clicarEmLogin();
-			PaginaRegistro registro = login.clicarNovoRegistro();
-			
-			String email = "flaviamendes29@mailinator.com";
-			registro.enderecoEmail(email);
-			registro.confirmarEnderecoEmail(email);
-			
-			String password = "123456";
-			registro.password(password);
-			registro.confirmarPassword(password);
-			registro.receberComunicacoesDeMarketing(true);
-			
-			PaginaConfirmarRegistro confirmarRegistro = registro.confirmar();
-			
-			String mensagemEsperada = "O seu registo foi efetuado com sucesso.";
-			assertEquals(mensagemEsperada, confirmarRegistro.mensagemExibida());
-			
-			
-			
-		}
+		System.out.println("\nIniciando Teste.");
+
+		PaginaPrincipal principal = new PaginaPrincipal();
+		principal.abrirMenu();
+
+		PaginaLogin login = principal.clicarEmLogin();
+		registro = login.clicarNovoRegistro();
+
+	}
+
+	@Test
+	public void registroComSucessoOptandoPorReceberComunicacoesDeMarketing() { // método - bloco de código
+																			
+		String email = "flaviamendes29@mailinator.com";
+		registro.enderecoEmail(email);
+		registro.confirmarEnderecoEmail(email);
+
+		String password = "123456";
+		registro.password(password);
+		registro.confirmarPassword(password);
+		registro.receberComunicacoesDeMarketing(true);
+
+		PaginaConfirmarRegistro confirmarRegistro = registro.confirmar();
+
+		String mensagemEsperada = "O seu registo foi efetuado com sucesso.";
+		assertEquals(mensagemEsperada, confirmarRegistro.mensagemExibida());
+
+	}
+
+	@Test
+	public void registroComSucessoOptandoPorNaoReceberComunicacoesDeMarketing() {
 		
 	
+		String email = "flaviamendes29@mailinator.com";
+		registro.enderecoEmail(email);
+		registro.confirmarEnderecoEmail(email);
 		
+		String password = "123456";
+		registro.password(password);
+		registro.confirmarPassword(password);
+		registro.receberComunicacoesDeMarketing(false);
 		
+		PaginaConfirmarRegistro confirmarRegistro = registro.confirmar();
 		
-		
+		String mensagemEsperada = "O seu registo foi efetuado com sucesso.";
+		assertEquals(mensagemEsperada, confirmarRegistro.mensagemExibida());
 		
 	}
 
-
-	
-
-
-	
-
-	
-	
-
-
+}
