@@ -47,10 +47,13 @@ public class TestesRegistro {
 			PaginaLogin login = principal.clicarEmLogin();
 			PaginaRegistro registro = login.clicarNovoRegistro();
 			
-			registro.enderecoEmail("flaviamendes29@mailinator.com");
-			registro.confirmarEnderecoEmail("flaviamendes29@mailinator.com");
-			registro.password("123456");
-			registro.confirmarPassword("123456");
+			String email = "flaviamendes29@mailinator.com";
+			registro.enderecoEmail(email);
+			registro.confirmarEnderecoEmail(email);
+			
+			String password = "123456";
+			registro.password(password);
+			registro.confirmarPassword(password);
 			registro.receberComunicacoesDeMarketing(true);
 			
 			PaginaConfirmarRegistro confirmarRegistro = registro.confirmar();
