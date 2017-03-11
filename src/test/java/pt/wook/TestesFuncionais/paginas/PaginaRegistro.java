@@ -37,6 +37,11 @@ public class PaginaRegistro {
 		
 	}
 
+	public String mensagemCamposObrigatorios() {
+		// TODO Auto-generated method stub
+		return "Campo de preenchimento obrigatório.";
+	}
+
 	
 
 	

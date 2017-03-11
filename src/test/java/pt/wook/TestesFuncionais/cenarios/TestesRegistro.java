@@ -70,5 +70,73 @@ public class TestesRegistro {
 		assertEquals(mensagemEsperada, confirmarRegistro.mensagemExibida());
 		
 	}
+	
+	@Test
+	public void naoConseguirSeRegistrarNaoInformandoEmail(){
+		
+		String email = "flaviamendes29@mailinator.com";
+		registro.confirmarEnderecoEmail(email);
+
+		String password = "123456";
+		registro.password(password);
+		registro.confirmarPassword(password);
+		registro.receberComunicacoesDeMarketing(true);
+		registro.confirmar();
+		
+		String mensagemEsperada = "Campo de preenchimento obrigatório.";
+		assertEquals(mensagemEsperada, registro.mensagemCamposObrigatorios());
+		
+	}
+	
+	@Test
+	public void naoConseguirSeRegistrarNaoConfirmandoEmail(){
+		
+		String email = "flaviamendes29@mailinator.com";
+		registro.enderecoEmail(email);
+
+		String password = "123456";
+		registro.password(password);
+		registro.confirmarPassword(password);
+		registro.receberComunicacoesDeMarketing(true);
+		registro.confirmar();
+		
+		String mensagemEsperada = "Campo de preenchimento obrigatório.";
+		assertEquals(mensagemEsperada, registro.mensagemCamposObrigatorios());
+		
+	}
+	
+	@Test
+	public void naoConseguirSeRegistrarNaoInformandoPassword(){
+		
+		String email = "flaviamendes29@mailinator.com";
+		registro.enderecoEmail(email);
+		registro.confirmarEnderecoEmail(email);
+
+		String password = "123456";
+		registro.confirmarPassword(password);
+		registro.receberComunicacoesDeMarketing(true);
+		registro.confirmar();
+		
+		String mensagemEsperada = "Campo de preenchimento obrigatório.";
+		assertEquals(mensagemEsperada, registro.mensagemCamposObrigatorios());
+		
+	}
+	
+	@Test
+	public void naoConseguirSeRegistrarNaoConfirmandoPassword(){
+		
+		String email = "flaviamendes29@mailinator.com";
+		registro.enderecoEmail(email);
+		registro.confirmarEnderecoEmail(email);
+
+		String password = "123456";
+		registro.password(password);
+		registro.receberComunicacoesDeMarketing(true);
+		registro.confirmar();
+		
+		String mensagemEsperada = "Campo de preenchimento obrigatório.";
+		assertEquals(mensagemEsperada, registro.mensagemCamposObrigatorios());
+		
+	}
 
 }
