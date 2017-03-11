@@ -1,4 +1,4 @@
-package pt.wook.TestesFuncionais;
+package pt.wook.TestesFuncionais.cenarios;
 
 import org.junit.After;
 import org.junit.AfterClass;

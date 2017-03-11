@@ -1,4 +1,4 @@
-package pt.wook.TestesFuncionais;
+package pt.wook.TestesFuncionais.cenarios;
 
 import static org.junit.Assert.*;
 
