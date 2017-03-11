@@ -25,6 +25,7 @@ public class TestesRegistro {
 		System.out.println("\nIniciando Teste.");
 
 		PaginaPrincipal principal = new PaginaPrincipal();
+		principal.abrirPagina();
 		principal.abrirMenu();
 
 		PaginaLogin login = principal.clicarEmLogin();

@@ -1,7 +1,7 @@
 package pt.wook.TestesFuncionais.paginas;
 
 
-public class PaginaLogin {
+public class PaginaLogin extends PaginaBase {
 
 	public PaginaRegistro clicarNovoRegistro() {
 		// TODO Auto-generated method stub

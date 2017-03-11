@@ -1,6 +1,6 @@
 package pt.wook.TestesFuncionais.paginas;
 
-public class PaginaRegistro {
+public class PaginaRegistro extends PaginaBase{
 
 	public void enderecoEmail(String email) {
 		// TODO Auto-generated method stub
