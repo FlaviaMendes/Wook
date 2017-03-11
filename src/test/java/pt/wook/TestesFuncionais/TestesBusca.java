@@ -6,6 +6,7 @@ import org.hamcrest.Matchers;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 
 import static org.hamcrest.Matchers.*;
 
@@ -25,7 +26,7 @@ public class TestesBusca {
 		System.setProperty("webdriver.chrome.driver", "C:\\EstudoFlavia\\chromedriver.exe");
 		urlDoSite = "https://www.wook.pt/";
 		
-		WebDriver navegador = new ChromeDriver(); // abre o navegador sem nada
+		navegador = new ChromeDriver(); // abre o navegador sem nada
 		navegador.manage().window().maximize(); // maximiza a janela
 	
 	}
@@ -102,7 +103,7 @@ public class TestesBusca {
 	}
 	
 	@Test
-	
+	@Ignore
 	public void PesquisarLivroPorEditor() throws InterruptedException{
 		
 		String nomeEditor = "Editorial Presença";
@@ -120,6 +121,7 @@ public class TestesBusca {
 		
 		WebElement mensagemResultadoBusca = navegador.findElement(By.xpath("//*[@id=\"search-page\"]/div[1]/h1"));
 		String mensagemExibida = mensagemResultadoBusca.getText();
+		System.out.println("Mensagem Exibida: " + mensagemExibida);
 		String mensagemEsperado = "4125 RESULTADOS PARA \"EDITORIAL PRESENÇA\"";
 		assertThat(mensagemEsperado, Matchers.matchesPattern("[0-9]* RESULTADOS PARA \"EDITORIAL PRESENÇA\""));
 		
