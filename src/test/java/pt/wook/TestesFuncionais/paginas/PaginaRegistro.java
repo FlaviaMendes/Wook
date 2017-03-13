@@ -1,44 +1,73 @@
 package pt.wook.TestesFuncionais.paginas;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
 public class PaginaRegistro extends PaginaBase{
 
 	public void enderecoEmail(String email) {
-		// TODO Auto-generated method stub
+		
 		System.out.println("Preenchendo Email: " + email);
+		
+		String enderecoEmail = "flavia100@mailinvator.com";
+		WebElement campoEnderecoEmail = navegador.findElement(By.name("email"));
+		campoEnderecoEmail.sendKeys(enderecoEmail);
+		
 	}
 
 	public void confirmarEnderecoEmail(String email) {
-		// TODO Auto-generated method stub
+
 		System.out.println("Preenchendo confirmação de Email: " + email);
+		
+		String confirmarEnderecoEmail = "flavia100@mailinvator.com";
+		WebElement campoConfirmarEnderecoEmail = navegador.findElement(By.name("confirm-email"));
+		campoConfirmarEnderecoEmail.sendKeys(confirmarEnderecoEmail);
 		
 	}
 
 	public void password(String password) {
-		// TODO Auto-generated method stub
+		
 		System.out.println("Preenchendo password: " + password);
+		
+		String senha = "1111";
+		WebElement campoPassword = navegador.findElement(By.name("pass"));
+		campoPassword.sendKeys(senha);
 		
 	}
 	
 	public void confirmarPassword(String password) {
-		// TODO Auto-generated method stub
+		
 		System.out.println("Confirmando password: " + password);
+		
+		String confrimarSenha = "1111";
+		WebElement campoConfirmarPassword = navegador.findElement(By.name("confirm-pass"));
+		campoConfirmarPassword.sendKeys(confrimarSenha);
 		
 	}
 
 	public void receberComunicacoesDeMarketing(boolean receber) {
-		// TODO Auto-generated method stub
+		
 		System.out.println("Recebendo comunicações? " + receber);
+		
+		WebElement confirmarComunicacaoMarketing = navegador.findElement(By.id("subscription-label"));
+		confirmarComunicacaoMarketing.isSelected();
+		
 	}
 
 	public PaginaConfirmarRegistro confirmar() {
-		// TODO Auto-generated method stub
+		
 		System.out.println("Confirmando registro.");
+		
+		WebElement botaoConfrimar = navegador.findElement(By.xpath("//*[@id=\"regist-user\"]/button/span"));
+		botaoConfrimar.click();
+			
 		return new PaginaConfirmarRegistro();
 		
 	}
 
 	public String mensagemCamposObrigatorios() {
-		// TODO Auto-generated method stub
+		
+		//
 		return "Campo de preenchimento obrigatório.";
 	}
 
