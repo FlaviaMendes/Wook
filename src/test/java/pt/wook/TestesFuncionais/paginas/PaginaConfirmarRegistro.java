@@ -7,7 +7,7 @@ public class PaginaConfirmarRegistro extends PaginaBase{
 
 	public String mensagemExibida() {
 		
-		WebElement mensagemRegistroComSucesso = navegador.findElement(By.xpath("//*[@id=\"overlayConfirmRegist\"]/div[2]/h1"));
+		WebElement mensagemRegistroComSucesso = navegador.findElement(By.id("overlayConfirmRegist"));
 		String mensagemRegistroExibida = mensagemRegistroComSucesso.getText();
 			
 		return mensagemRegistroExibida;

@@ -65,9 +65,43 @@ public class PaginaRegistro extends PaginaBase{
 		
 	}
 
-	public String mensagemCamposObrigatorios() {
+	public String mensagemCampoObrigatorioEmail() {
 		
-		//
+		System.out.println("Mensagem de Erro");
+		
+		WebElement mensagemCampoObrigatorio = navegador.findElement(By.id("email-error"));
+		mensagemCampoObrigatorio.isDisplayed();
+		
+		return "Campo de preenchimento obrigatório.";
+	}
+
+	public String mensagemCampoObrigatorioConfirmarEmail() {
+
+		System.out.println("Mensagem de Erro");
+		
+		WebElement mensagemCampoObrigatorio = navegador.findElement(By.id("confirm-email-error"));
+		mensagemCampoObrigatorio.isDisplayed();
+		
+		return "Campo de preenchimento obrigatório.";
+	}
+
+	public String mensagemCampoObrigatorioPassword() {
+
+		System.out.println("Mensagem de Erro");
+				
+		WebElement mensagemCampoObrigatorio = navegador.findElement(By.id("pass-error"));
+		mensagemCampoObrigatorio.isDisplayed();
+		
+		return "Campo de preenchimento obrigatório.";
+	}
+
+	public String mensagemCampoObrigatorioConfirmarPassword() {
+		
+		System.out.println("Mensagem de Erro");
+		
+		WebElement mensagemCampoObrigatorio = navegador.findElement(By.id("confirm-pass-error"));
+		mensagemCampoObrigatorio.isDisplayed();
+		
 		return "Campo de preenchimento obrigatório.";
 	}
 

@@ -79,7 +79,7 @@ public class TestesRegistro {
 		registro.confirmar();
 		
 		String mensagemEsperada = "Campo de preenchimento obrigatório.";
-		assertEquals(mensagemEsperada, registro.mensagemCamposObrigatorios());
+		assertEquals(mensagemEsperada, registro.mensagemCampoObrigatorioEmail());
 		
 	}
 	
@@ -96,7 +96,7 @@ public class TestesRegistro {
 		registro.confirmar();
 		
 		String mensagemEsperada = "Campo de preenchimento obrigatório.";
-		assertEquals(mensagemEsperada, registro.mensagemCamposObrigatorios());
+		assertEquals(mensagemEsperada, registro.mensagemCampoObrigatorioConfirmarEmail());
 		
 	}
 	
@@ -113,7 +113,7 @@ public class TestesRegistro {
 		registro.confirmar();
 		
 		String mensagemEsperada = "Campo de preenchimento obrigatório.";
-		assertEquals(mensagemEsperada, registro.mensagemCamposObrigatorios());
+		assertEquals(mensagemEsperada, registro.mensagemCampoObrigatorioPassword());
 		
 	}
 	
@@ -130,7 +130,7 @@ public class TestesRegistro {
 		registro.confirmar();
 		
 		String mensagemEsperada = "Campo de preenchimento obrigatório.";
-		assertEquals(mensagemEsperada, registro.mensagemCamposObrigatorios());
+		assertEquals(mensagemEsperada, registro.mensagemCampoObrigatorioConfirmarPassword());
 		
 	}
 
