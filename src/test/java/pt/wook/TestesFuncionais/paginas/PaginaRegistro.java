@@ -9,9 +9,8 @@ public class PaginaRegistro extends PaginaBase{
 		
 		System.out.println("Preenchendo Email: " + email);
 		
-		String enderecoEmail = "flavia100@mailinvator.com";
 		WebElement campoEnderecoEmail = navegador.findElement(By.name("email"));
-		campoEnderecoEmail.sendKeys(enderecoEmail);
+		campoEnderecoEmail.sendKeys(email);
 		
 	}
 
@@ -19,9 +18,8 @@ public class PaginaRegistro extends PaginaBase{
 
 		System.out.println("Preenchendo confirmação de Email: " + email);
 		
-		String confirmarEnderecoEmail = "flavia100@mailinvator.com";
 		WebElement campoConfirmarEnderecoEmail = navegador.findElement(By.name("confirm-email"));
-		campoConfirmarEnderecoEmail.sendKeys(confirmarEnderecoEmail);
+		campoConfirmarEnderecoEmail.sendKeys(email);
 		
 	}
 
@@ -29,9 +27,8 @@ public class PaginaRegistro extends PaginaBase{
 		
 		System.out.println("Preenchendo password: " + password);
 		
-		String senha = "1111";
 		WebElement campoPassword = navegador.findElement(By.name("pass"));
-		campoPassword.sendKeys(senha);
+		campoPassword.sendKeys(password);
 		
 	}
 	
@@ -39,9 +36,8 @@ public class PaginaRegistro extends PaginaBase{
 		
 		System.out.println("Confirmando password: " + password);
 		
-		String confrimarSenha = "1111";
 		WebElement campoConfirmarPassword = navegador.findElement(By.name("confirm-pass"));
-		campoConfirmarPassword.sendKeys(confrimarSenha);
+		campoConfirmarPassword.sendKeys(password);
 		
 	}
 
@@ -50,7 +46,13 @@ public class PaginaRegistro extends PaginaBase{
 		System.out.println("Recebendo comunicações? " + receber);
 		
 		WebElement confirmarComunicacaoMarketing = navegador.findElement(By.id("subscription-label"));
-		confirmarComunicacaoMarketing.isSelected();
+		
+		if (confirmarComunicacaoMarketing.isSelected() != receber){
+			
+			confirmarComunicacaoMarketing.click();
+			
+		}
+			
 		
 	}
 

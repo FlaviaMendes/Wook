@@ -1,9 +1,14 @@
 package pt.wook.TestesFuncionais.cenarios;
 
 import static org.junit.Assert.*;
+
+import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 
+import pt.wook.TestesFuncionais.helpers.StringHelper;
+import pt.wook.TestesFuncionais.paginas.PaginaBase;
 import pt.wook.TestesFuncionais.paginas.PaginaConfirmarRegistro;
 import pt.wook.TestesFuncionais.paginas.PaginaLogin;
 import pt.wook.TestesFuncionais.paginas.PaginaPrincipal;
@@ -12,6 +17,7 @@ import pt.wook.TestesFuncionais.paginas.PaginaRegistro;
 public class TestesRegistro {
 
 	private PaginaRegistro registro;
+	private String email;
 
 	@Before
 	public void antesDeCadaTeste() {
@@ -24,13 +30,29 @@ public class TestesRegistro {
 
 		PaginaLogin login = principal.clicarEmLogin();
 		registro = login.clicarNovoRegistro();
+		
+		email = StringHelper.gerarEmail();
 
 	}
+	
+	@After
+	public void depoisDeCadaTeste(){
+		
+		PaginaBase.limparTodosCookies();
+		
+	}
+	
+	@AfterClass
+	public static void depoisDeTodosOsTestes(){
+		
+		PaginaBase.fecharNavegador();
+	}
+	
+	
 
 	@Test
 	public void registroComSucessoOptandoPorReceberComunicacoesDeMarketing() { // método - bloco de código
 																			
-		String email = "flaviamendes29@mailinator.com";
 		registro.enderecoEmail(email);
 		registro.confirmarEnderecoEmail(email);
 
@@ -50,7 +72,6 @@ public class TestesRegistro {
 	public void registroComSucessoOptandoPorNaoReceberComunicacoesDeMarketing() {
 		
 	
-		String email = "flaviamendes29@mailinator.com";
 		registro.enderecoEmail(email);
 		registro.confirmarEnderecoEmail(email);
 		
@@ -69,7 +90,6 @@ public class TestesRegistro {
 	@Test
 	public void naoConseguirSeRegistrarNaoInformandoEmail(){
 		
-		String email = "flaviamendes29@mailinator.com";
 		registro.confirmarEnderecoEmail(email);
 
 		String password = "123456";
@@ -86,7 +106,6 @@ public class TestesRegistro {
 	@Test
 	public void naoConseguirSeRegistrarNaoConfirmandoEmail(){
 		
-		String email = "flaviamendes29@mailinator.com";
 		registro.enderecoEmail(email);
 
 		String password = "123456";
@@ -103,7 +122,6 @@ public class TestesRegistro {
 	@Test
 	public void naoConseguirSeRegistrarNaoInformandoPassword(){
 		
-		String email = "flaviamendes29@mailinator.com";
 		registro.enderecoEmail(email);
 		registro.confirmarEnderecoEmail(email);
 
@@ -120,7 +138,6 @@ public class TestesRegistro {
 	@Test
 	public void naoConseguirSeRegistrarNaoConfirmandoPassword(){
 		
-		String email = "flaviamendes29@mailinator.com";
 		registro.enderecoEmail(email);
 		registro.confirmarEnderecoEmail(email);
 
