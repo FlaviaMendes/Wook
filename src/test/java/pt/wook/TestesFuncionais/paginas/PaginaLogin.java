@@ -56,4 +56,9 @@ public class PaginaLogin extends PaginaBase {
 		
 	}
 
+	public String clicarRecuperarPassword() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
